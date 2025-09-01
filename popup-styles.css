@@ -1,0 +1,100 @@
+.input-field{
+     display:flex;
+     flex-direction:column;
+     align-items:center;
+}
+ 
+ .todo{
+     padding:1.3em 3em;
+     margin-top:3.5rem;
+     border-radius:12px;
+     border:1px solid #4169E1;
+     font-size:1rem;
+ }
+.date-picker{
+    padding:1.3em 5em;
+    border-radius:12px;
+    border:1px solid #4169E1;
+    margin-top:0.5em;
+}
+.add-task{
+    padding:1.2rem 10rem;
+    background-color: #4169E1;
+    border:1px solid #4169E1;
+    border-radius:15px;
+    color:white;
+    font-weight:bold;
+    margin-top:4rem;
+}
+.date-tag{
+    font-weight:bold;
+    margin-top:6px;
+}
+
+.option-field{
+     display:flex;
+     flex-direction:column;
+     align-items:center;
+}
+.edit{
+    padding:1.1rem 5rem;
+    display:flex;
+    align-items: center;
+    background-color: transparent;
+    margin-top:4rem;
+    border-radius:15px;
+    font-size:1.1rem;
+    justify-content:space-between;
+    border:1px solid #4169E1;
+    color:#4169E1;
+}
+.mark-complete{
+    padding:1.1em 7.2em;
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    border-radius:15px;
+    border: 1px solid #4169E1;
+    color:#4169E1;
+    margin-top:0.5em;
+    
+}
+.delete{
+    padding:1.3em 12em;
+    border-radius:15px;
+    font-weight:bold;
+    background-color:#dc2626;
+    color:white;
+    border:1px solid red;
+    margin-top:2ch;
+}
+ 
+
+.back-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  padding: 6px;
+  border-radius: 50%;
+  transition: 0.2s ease;
+}
+
+.back-btn:hover {
+  background: rgba(0,0,0,0.05);
+}
+
+.done-btn, .edit-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 50%;
+  transition:  0.2s ease;
+}
+
+.done-btn:hover, .edit-btn:hover {
+  background: rgba(37, 99, 235, 0.1); /* soft blue hover */
+}

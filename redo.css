@@ -1,0 +1,272 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    background-color:#4169E1 ;
+}
+@media (max-width:550px){
+
+.added{
+    display:inline-block;
+    vertical-align:top;
+    margin-top:0.9em;
+    margin-left:0.5em;
+}
+.count{
+    font-weight: bold;
+    font-size:1.3em;
+    text-align: center;
+    position:relative;
+    bottom:0.5em;
+    right:1.5em;
+    font-family: Ubuntu;
+    
+}
+
+.top-section{
+    background-color: #4169E1;
+    height: 35vh;
+    border-radius: 0px 0px 5em 5em;
+}
+.taskList{
+    display: flex;
+    flex-direction: column;
+    background-color:#EAF4FF;
+    padding:0px 15px;
+    border-radius:30px 30px 0px 0px;
+    overflow-y:auto;
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    bottom:0px;
+    top:22rem;
+    font-family: Ubuntu, sans-serif;
+    box-shadow: inset 0px 10px 10px -10px rgba(0, 0, 0, 0.5);
+}
+
+.icons{
+    
+    width:3.7em;
+    border-radius:50%;
+    margin-top:0.6em;
+    margin-left:0.6em;
+}
+.task{
+    border-radius: 2px;
+    margin-top:20px;
+    box-shadow: 2px 2px 7px rgba(6, 28, 69, 0.2);
+    padding:0.3rem 0.3rem;
+    display: flex;
+    justify-content:space-between;
+    font-family: sans-serif;
+    width: 97%;
+    border-radius: 15px;
+    margin:auto;
+    margin-top:10px;
+    border-left:4px solid #4169E1;
+    
+}
+.date-name-container{
+    display: flex;
+    flex-direction:column;
+    justify-content: space-between;
+    padding:10px 30px;
+}
+.date{
+    font-size:13px;
+    margin-top:3px;
+
+}
+.name{
+    font-weight: 700
+}
+
+.status{
+    position: absolute;
+    right:0px;
+    height:26ch;
+    background-color: #EAF4FF;
+    width:95%;
+    top:6rem;
+    border-radius:20px 0 0 20px;
+    box-shadow: 3px 7px 7px -5px;
+}
+
+.wrapper{
+    background-color:white;
+    padding:1.5rem;
+    position: absolute;
+    height: fit-content;
+    left:1rem;
+    top:7rem;
+    border-radius: 30px;
+  
+}
+
+.wrapper2,
+.wrapper3{
+    background-color:white;
+    height:4.9rem;
+    width:40vw;
+    border-radius:20px;
+}
+
+ .progress{
+   background: conic-gradient(dodgerblue 0deg 180deg, transparent 180deg 360deg);
+   height:130px;
+   width:130px;
+   border-radius:50%;
+   box-shadow: 0 0 15px rgba(0,0,0,0.6);
+   display:flex;
+   align-items:center;
+   justify-content:center;
+       
+           
+        }
+  .percentage{
+    height:80px;
+    width:80px;
+    border-radius:50%;
+    background-color:white;
+    display:flex;
+    align-items: center;
+    justify-content:center;
+    font-family: Ubuntu, sans-serif;
+    font-weight:600;
+    font-size: 1.2rem;
+    box-shadow:inset 0 0 8px rgba(0,0,0,0.6);
+   }
+ 
+    .added{
+    font-size:16px;
+    font-weight:500;
+    font-family: Ubuntu;
+  }
+
+.menu-icon-container {
+  width: 2rem; /* Adjust as needed */
+  height: 30px; /* Adjust as needed */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  margin-left:1em;
+  margin-top: 2em;
+}
+
+.bar1 {
+  width: 100%;
+  height: 4px; /* Thickness of the bars */
+  background-color: white; /* Color of the bars */
+  transition: 0.4s; /* For animation when  */
+  border-radius:4px;
+}
+.bar2{
+    width: 60%;
+    height: 4px;
+    background-color: white; 
+    transition: 0.4s;
+    border-radius:4px;
+}
+.bar3{
+    width: 80%;
+  height: 4px; /* Thickness of the bars */
+  background-color: white; /* Color of the bars */
+  transition: 0.4s; /* For animation when toggled */
+  border-radius:4px;
+}
+
+.menu{
+    height:65px;
+    width:65px;
+    border-radius:50%;
+    border:1px solid #4169E1;
+    color:white;
+    background-color: #4169E1;
+    font-size: 35px;
+    position:fixed;
+    right:1.2em;
+    bottom:2.5em;
+    cursor:pointer;
+    box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.5);
+}
+.greetings{
+    color:white;
+    font-size: 33px;
+    font-weight: 600;
+    position:absolute;
+    left:30%;
+    top:2rem;
+    font-family: Ubuntu, sans-serif;
+}
+.group{
+    display:flex;
+    font-weight: 400;
+    font-size:1.2em;
+    justify-content: space-between;
+    width:100%;
+    padding:10px 60px;
+    border:none;
+    position:sticky;
+    top:0px;
+    background-color:#EAF4FF;
+    border-radius:10px;
+}
+
+.completed,
+.pending{
+    border-bottom:4px solid #4169E1;
+    border-radius:3px;
+    padding:4px 8px;
+    font-size: 1rem;
+    
+}
+.checkbox{
+    width: 20px;
+}
+.options{
+    background-color: transparent;
+    border:none;
+    font-size:23px;
+    font-weight:500;
+    margin-right: 1em;
+}
+.popup{
+    position:absolute;
+    height:40vh;
+    bottom:0px;
+    left:0px;
+    right:0px;
+    background-color:#EAF4FF ;
+    border-radius:40px 40px 0 0;
+    animation: raisePop-up 0.3s ease;
+    display: none;
+}
+ .remaining{
+      background-color:frost;
+      position: absolute;
+      right:0.5rem;
+      top:6.8rem;
+      height:auto;
+      padding:0.5em 1em;
+      border-radius:3%;
+      display: flex;
+      flex-direction: column;
+      gap:2ch;
+      
+  }
+
+@keyframes raisePop-up {
+   from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+}
+}
