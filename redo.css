@@ -30,7 +30,7 @@ body{
     height: 35vh;
     border-radius: 0px 0px 5em 5em;
 }
-.taskList{
+.taskContainer{
     display: flex;
     flex-direction: column;
     background-color:#EAF4FF;
@@ -114,7 +114,6 @@ body{
 }
 
  .progress{
-   background: conic-gradient(dodgerblue 0deg 180deg, transparent 180deg 360deg);
    height:130px;
    width:130px;
    border-radius:50%;
