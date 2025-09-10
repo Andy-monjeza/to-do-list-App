@@ -2,14 +2,47 @@ export class todolist {
 
 constructor(){
 this.date= new Date();
+this.optionField=`
+<div class="option-field">
+       <button class="back-btn">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M15 18l-6-6 6-6"/>
+  </svg>
+</button>
+
+  <button class="edit">
+  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 20h9"/>
+    <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/>
+  </svg>
+  Edit task
+</button>
+
+
+ <button class="mark-complete">
+  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M5 13l4 4L19 7"/>
+  </svg>
+          
+     Done</button>
+
+     
+     
+      <button class="delete">Delete</button>
+`
 this.pending=document.querySelector('.pending-count');
 this.overdue=document.querySelector('.overdue');
 this.progress=document.querySelector('.progress');
 this.progressPrcnt=document.querySelector('.percentage');
+this.popup=document.querySelector('.popup');
+this.taskContainer=document.querySelector('.taskContainer');
 this.pendingTasks=[];
 this.completedTasks=[];
 this.overDueTasks=[];
 this.taskList=document.querySelector('.taskList');
+
+this.toggleTaskOptions();
+this.updateStats();
 
 this.months= ["January", "February", "March", "April", "May", "June",
  "July", "August", "September", "October", "November", "December"];
@@ -68,10 +101,41 @@ this.taskList.innerHTML=listHolder;
   }
 }
 
-deleteTask(){
-this.pendingTasks=this.pendingTasks.filter((task)=>{
-  return task.id!==e.target.id;
+toggleTaskOptions(){
+ 
+this.taskContainer.addEventListener("click", (e)=>{
+  if(e.target.classList.contains('options')){
+   const element=e.target;
+    const id=element.dataset.taskId;
+    this.popup.style.display="block";
+    this.popup.innerHTML=this.optionField;
+
+    this.popup.addEventListener("click",(e)=>{
+      if(e.target.classList.contains('delete')){
+      this.pendingTasks=this.pendingTasks.filter((task)=>{
+        return task.id!==id;
+      })
+      this.popup.style.display="none";
+      this.updateTasks();
+      this.updateStats();
+      }
+      else if(e.target.classList.contains('mark-complete')){
+        this.pendingTasks.forEach((task)=>{
+          if(task.id===id){
+            this.completedTasks.push(task);
+            this.pendingTasks=this.pendingTasks.filter((task)=>{
+              return task.id!==id;
+            })
+            this.updateTasks();
+            this.updateStats();
+          }
+        })
+      }
+    })
+  }
 })
+
+
 }
 
 updateStats(){
@@ -90,8 +154,7 @@ this.fillProgress(prntCount);
 }
 
 markComplete(){
-
-
+  
 
 this.completedTasks.push({
   taskName:e.target.taskName,
@@ -132,10 +195,6 @@ fillProgress(progress){
     }
    },10)
    
-}
-
-toggleList(){
-  
 }
 
 }
