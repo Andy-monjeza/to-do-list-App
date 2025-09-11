@@ -99,7 +99,7 @@ body{
     padding:1.5rem;
     position: absolute;
     height: fit-content;
-    left:1rem;
+    left:0.8rem;
     top:7rem;
     border-radius: 30px;
   
@@ -109,7 +109,7 @@ body{
 .wrapper3{
     background-color:white;
     height:4.9rem;
-    width:40vw;
+    width:23ch;
     border-radius:20px;
 }
 
