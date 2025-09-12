@@ -21,7 +21,7 @@ menuBtn.addEventListener("click",()=>{
         popup.style.display="block";
     } 
    popup.innerHTML=inputField;
-
+  
 })
 
 popup.addEventListener("click",(e)=>{
@@ -40,3 +40,4 @@ popup.addEventListener("click",(e)=>{
  popup.innerHTML=inputField;
   }
 })
+
