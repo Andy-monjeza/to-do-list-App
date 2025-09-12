@@ -30,12 +30,28 @@ this.optionField=`
      
       <button class="delete">Delete</button>
 `
+this.inputField=`
+ <div class="input-field">
+  <button class="back-btn">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M15 18l-6-6 6-6"/>
+  </svg>
+</button>
+        <input class="todo" placeholder="To-do">
+        <span class="date-tag">Due on:</span>
+        <input type="date" class="date-picker">
+        <button class="add-task">Add</button>
+    </div>
+`;
 this.pending=document.querySelector('.pending-count');
 this.overdue=document.querySelector('.overdue');
 this.progress=document.querySelector('.progress');
 this.progressPrcnt=document.querySelector('.percentage');
 this.popup=document.querySelector('.popup');
 this.taskContainer=document.querySelector('.taskContainer');
+this.task=document.querySelector('.todo');
+this.datepicker=document.querySelector('.date-picker');
+this.activeList="pendingList";
 this.pendingTasks=[];
 this.completedTasks=[];
 this.overDueTasks=[];
@@ -77,12 +93,13 @@ this.pendingTasks.push({
 }
 
 updateTasks(){
-
-
+    
   if(this.pendingTasks.lenght===0){
     this.taskList.innerHTML=`<img class="empty-icon" src="" alt="">`
   }else{
-  let listHolder=``;
+
+    if(this.activeList==="pendingList"){
+     let listHolder=``;
   
   this.pendingTasks.forEach((task)=>{
     
@@ -98,6 +115,24 @@ updateTasks(){
   })
  
 this.taskList.innerHTML=listHolder;
+    }else if(this.activeList==="completedList"){
+        let listHolder=``;
+  
+  this.completedTasks.forEach((task)=>{
+
+         listHolder+=`<div class="task">
+      <div class="date-name-container">
+        <span class="name ">${task.taskName}</span>
+        <span style="color:green;" class="date">Completed</span>
+      </div>
+       <button class="options" data-task-id="${task.id}">⋮</button>
+     </div>`
+
+  })
+ 
+this.taskList.innerHTML=listHolder;
+    }
+
   }
 }
 
@@ -130,15 +165,41 @@ this.taskContainer.addEventListener("click", (e)=>{
             this.updateStats();
           }
         })
+      }else if (e.target.classList.contains('edit')){
+        this.popup.innerHTML=this.inputField;
+        if(e.target.classList.contains('add-task')){
+             this.pendingTasks.forEach(task=>{
+                if(task.id===id){
+              task.taskName=this.task.value;
+              task.date=this.datepicker;
+            }
+         })
+            
+        }
+       
+
       }
     })
+  } else if(e.target.classList.contains('completed')){
+    let list=``;
+    this.completedTasks.forEach((task)=>{
+       list+=`<div class="task">
+      <div class="date-name-container">
+        <span class="name ">${task.taskName}</span>
+        <span class="date">${task.dueDate}</span>
+      </div>
+       <button class="options" data-task-id="${task.id}">⋮</button>
+     </div>`;
+    })
+    this.taskList.innerHTML=list;
+    this.activeList="completedList";
   }
 })
 
 
 }
 
-updateStats(){
+updateStats(){ 
   this.checkIfDue();
 this.pending.innerHTML=this.pendingTasks.length;
 const totalTasks=this.completedTasks.length+this.pendingTasks.length;
