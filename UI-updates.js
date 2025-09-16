@@ -1,6 +1,8 @@
 export class todolist {
 
 constructor(){
+//all program related variables i declared them here
+
 this.date= new Date();
 this.optionField=`
 <div class="option-field">
@@ -43,14 +45,27 @@ this.inputField=`
         <button class="add-task">Add</button>
     </div>
 `;
+this.editField=`
+ <div class="input-field">
+  <button class="back-btn">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M15 18l-6-6 6-6"/>
+  </svg>
+</button>
+        <input class="todo" placeholder="To-do">
+        <span class="date-tag">Due on:</span>
+        <input type="date" class="date-picker">
+        <button class="change">Change</button>
+    </div>
+`;
 this.pending=document.querySelector('.pending-count');
 this.overdue=document.querySelector('.overdue');
 this.progress=document.querySelector('.progress');
 this.progressPrcnt=document.querySelector('.percentage');
 this.popup=document.querySelector('.popup');
 this.taskContainer=document.querySelector('.taskContainer');
-this.task=document.querySelector('.todo');
-this.datepicker=document.querySelector('.date-picker');
+this.pendingList=document.querySelector('.pending');
+this.completedList=document.querySelector('.completed');
 this.activeList="pendingList";
 this.pendingTasks=[];
 this.completedTasks=[];
@@ -64,7 +79,7 @@ this.months= ["January", "February", "March", "April", "May", "June",
  "July", "August", "September", "October", "November", "December"];
 
 }
-
+//grabs task
 addTask(task,dateValue){
  const today=new Date();
       today.setHours(0,0,0,0);
@@ -92,18 +107,15 @@ this.pendingTasks.push({
 
 }
 
+//renders all the tasks
 updateTasks(){
-    
-  if(this.pendingTasks.lenght===0){
-    this.taskList.innerHTML=`<img class="empty-icon" src="" alt="">`
-  }else{
 
     if(this.activeList==="pendingList"){
-     let listHolder=``;
-  
-  this.pendingTasks.forEach((task)=>{
-    
 
+     
+    let listHolder=``;
+  
+  this.pendingTasks.forEach((task)=>{   
          listHolder+=`<div class="task">
       <div class="date-name-container">
         <span class="name ">${task.taskName}</span>
@@ -112,9 +124,11 @@ updateTasks(){
        <button class="options" data-task-id="${task.id}">⋮</button>
      </div>`
 
-  })
+  }) 
  
 this.taskList.innerHTML=listHolder;
+      
+     
     }else if(this.activeList==="completedList"){
         let listHolder=``;
   
@@ -123,7 +137,7 @@ this.taskList.innerHTML=listHolder;
          listHolder+=`<div class="task">
       <div class="date-name-container">
         <span class="name ">${task.taskName}</span>
-        <span style="color:green;" class="date">Completed</span>
+        <span   style="color:green;" class="date">Completed</span>
       </div>
        <button class="options" data-task-id="${task.id}">⋮</button>
      </div>`
@@ -133,9 +147,10 @@ this.taskList.innerHTML=listHolder;
 this.taskList.innerHTML=listHolder;
     }
 
-  }
+  
 }
 
+//all the task options from the 3 dot button 
 toggleTaskOptions(){
  
 this.taskContainer.addEventListener("click", (e)=>{
@@ -153,7 +168,7 @@ this.taskContainer.addEventListener("click", (e)=>{
       this.popup.style.display="none";
       this.updateTasks();
       this.updateStats();
-      }
+      }   
       else if(e.target.classList.contains('mark-complete')){
         this.pendingTasks.forEach((task)=>{
           if(task.id===id){
@@ -163,42 +178,44 @@ this.taskContainer.addEventListener("click", (e)=>{
             })
             this.updateTasks();
             this.updateStats();
+            this.popup.style.display="none";
           }
         })
-      }else if (e.target.classList.contains('edit')){
-        this.popup.innerHTML=this.inputField;
-        if(e.target.classList.contains('add-task')){
-             this.pendingTasks.forEach(task=>{
-                if(task.id===id){
-              task.taskName=this.task.value;
-              task.date=this.datepicker;
-            }
-         })
-            
-        }
+      }else if(e.target.classList.contains('edit')){
+        this.popup.innerHTML=this.editField;
+        const editInput=this.popup.querySelector('.todo');
+        const newDate=this.popup.querySelector('.date-picker');
+        this.popup.querySelector('.change').addEventListener("click",()=>{
+           this.pendingTasks.forEach((tasks) => {
+          if(tasks.id===id){
+            tasks.taskName=editInput.value;
+            tasks.dueDate= newDate.value || tasks.dueDate;
+           
+          }
+        });
+        this.updateTasks();
+        this.popup.style.display="none";
+        })
        
-
       }
     })
-  } else if(e.target.classList.contains('completed')){
-    let list=``;
-    this.completedTasks.forEach((task)=>{
-       list+=`<div class="task">
-      <div class="date-name-container">
-        <span class="name ">${task.taskName}</span>
-        <span class="date">${task.dueDate}</span>
-      </div>
-       <button class="options" data-task-id="${task.id}">⋮</button>
-     </div>`;
+  
+  } else if(e.target.classList.contains('pending')||e.target.classList.contains('completed')){
+     this.activeList= e.target.classList.contains('pending') ? "pendingList":"completedList";
+     
+    document.querySelectorAll('.pending,.completed').forEach((tab)=>{
+      tab.style.borderBottom="none";
     })
-    this.taskList.innerHTML=list;
-    this.activeList="completedList";
+      e.target.style.borderBottom="4px solid #4169E1";
+     this.updateTasks();
   }
+  
 })
 
 
 }
 
+//calculate all stats complete tasks and pending ,plus update progress bar
 updateStats(){ 
   this.checkIfDue();
 this.pending.innerHTML=this.pendingTasks.length;
@@ -214,20 +231,12 @@ this.fillProgress(prntCount);
 
 }
 
-markComplete(){
-  
-
-this.completedTasks.push({
-  taskName:e.target.taskName,
-  dueDate:e.target.dueDate,
-  id:e.target.id
-})
-}
-
+//here im creating a task id for each task 
 generateID(){
 return crypto.randomUUID();
 }
 
+// check if the date is due 
 checkIfDue() {
   this.date.setHours(0, 0, 0, 0); 
   
@@ -243,6 +252,7 @@ checkIfDue() {
   this.overdue.innerHTML = this.overDueTasks.length;
 }
 
+//filling the progress bar 
 fillProgress(progress){
   let count=progress;
   let start=0;
