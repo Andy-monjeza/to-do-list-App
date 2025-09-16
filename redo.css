@@ -6,7 +6,7 @@
 body{
     background-color:#4169E1 ;
 }
-@media (max-width:550px){
+
 
 .added{
     display:inline-block;
@@ -171,9 +171,9 @@ body{
 }
 .bar3{
     width: 80%;
-  height: 4px; /* Thickness of the bars */
-  background-color: white; /* Color of the bars */
-  transition: 0.4s; /* For animation when toggled */
+  height: 4px; 
+  background-color: white; 
+  transition: 0.4s; 
   border-radius:4px;
 }
 
@@ -216,7 +216,7 @@ body{
 
 .completed,
 .pending{
-    border-bottom:4px solid #4169E1;
+    cursor:pointer;
     border-radius:3px;
     padding:4px 8px;
     font-size: 1rem;
@@ -267,5 +267,4 @@ body{
     opacity: 1;
   }
 
-}
 }
