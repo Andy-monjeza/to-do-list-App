@@ -6,7 +6,7 @@
  
  .todo{
      padding:1.3em 3em;
-     margin-top:3.5rem;
+     margin-top:2rem;
      border-radius:12px;
      border:1px solid #4169E1;
      font-size:1rem;
@@ -17,14 +17,14 @@
     border:1px solid #4169E1;
     margin-top:0.5em;
 }
-.add-task{
-    padding:1.2rem 10rem;
-    background-color: #4169E1;
-    border:1px solid #4169E1;
+.add-task, .change{
+  padding:1.3em 12em;
     border-radius:15px;
-    color:white;
     font-weight:bold;
-    margin-top:4rem;
+    background-color:#4169E1;
+    color:white;
+    border:1px solid #4169E1;
+    margin-top:2ch;
 }
 .date-tag{
     font-weight:bold;
